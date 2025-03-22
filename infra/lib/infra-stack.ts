@@ -26,6 +26,11 @@ export class InfraStack extends cdk.Stack {
       description: "Lambda for centralized email-notification",
       runtime: lambda.Runtime.NODEJS_22_X,
       code: lambda.Code.fromAsset("../service/lambdas/build"),
+      environment: {
+        SMTP_HOST: process.env.SMTP_HOST || "",
+        SMTP_PORT: process.env.SMTP_PORT || "587",
+        EMAIL_FROM: process.env.EMAIL_FROM || "i_am_stephen@stephenc.info",
+      },
       handler: "index.handler",
     });
 
